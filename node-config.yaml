@@ -1,0 +1,13 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: myCluster
+  region: us-east-1
+  version: '1.14'
+nodeGroups:
+  - name: "standard-workloads"
+    labels: {type: standard-workers}
+    instanceType: t2.large
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 4
