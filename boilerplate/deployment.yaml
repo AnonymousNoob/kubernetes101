@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "my-deployment"
+  namespace: "myNamespace"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myApp
+  template:
+    metadata:
+      labels:
+        app: "my"
+    spec:
+      containers:
+      - image: myRegistry/myApp
+        imagePullPolicy: Always
+        name: "my"
+        env:
+        - name: myENV
+          value: "myVal"
+        - name: my_WORKERS
+          value: "2"
+        - name: myIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        ports:
+        - containerPort: 80
+          name: myApp
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate                   

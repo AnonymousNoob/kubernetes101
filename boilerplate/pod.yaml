@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myApp
+  namespace: myNamespace
+  labels:
+    app: myApp
+spec:
+  containers:
+    - name: myApp
+      image: cr8kdevseasia01.azurecr.io/myApp
+      env:    
+      - name: myIP
+        valueFrom:
+          fieldRef:
+            fieldPath: status.hostIP

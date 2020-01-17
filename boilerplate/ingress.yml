@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "my-ingress"
+  namespace: "myNamespace"
+  annotations:
+    kubernetes.io/ingress.class: myIngressClass
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: my-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /path/to/first/*
+            backend:
+              serviceName: "my-service"
+              servicePort: 8000
+          - path: /path/to/second/*
+            backend:
+              serviceName: "my-service"
+              servicePort: 8001      
+          
